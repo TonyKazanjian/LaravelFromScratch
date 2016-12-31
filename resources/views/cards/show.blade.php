@@ -9,7 +9,19 @@
             <ul class="list-group">
                 @foreach($card->notes as $note)
 
-                    <li class="list-group-item">{{ $note->body }}</li>
+
+                    <div>
+                        <li class="list-group-item">
+
+
+                            <a href="/notes/{{$note->id}}/edit">{{ $note -> body }}</a>
+
+                            <a href="#" style="float: right">{{ $note -> user->username }}</a>
+
+                        </li>
+
+                        <!-- $card->path() gives us a string representation of URI on the card itself -->
+                    </div>
                 @endforeach
 
             </ul>

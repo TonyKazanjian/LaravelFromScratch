@@ -22,6 +22,10 @@ class CardsController extends Controller
 
 //        $card = Card::find($id); With type hinting, Laravel finds the card by ID for us
 
+//        $card = Card::with('notes.user')->find(1); //eager load with notes and user
+//        return $card->notes[0]->user; //n+1 problem in foreach statement
+
+        $card ->load('notes.user'); //best way to eager load
         return view('cards.show', compact('card'));
     }
 
