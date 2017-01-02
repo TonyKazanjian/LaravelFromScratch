@@ -17,7 +17,8 @@ class Card extends Model
 //        return '/cards/' . $this ->id;
 //    }
 
-    public function addNote(Note $note) {
+    public function addNote(Note $note, $userId) {
+        $note->user_id = $userId;
         return $this->notes()->save($note);
     }
 }

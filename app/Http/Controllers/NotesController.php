@@ -7,10 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Note;
+use Illuminate\Support\Facades\Auth;
 
 class NotesController extends Controller
 {
     public function store(Request $request, Card $card) {
+        //For validating
+         $this->validate($request, [
+            'body' => 'required|min:10' // look at Laravel documentation for other rules we can reference
+         ]);
+
+        // for adding the user:
+        $note = new Note($request->all());
+//        $note ->user_id = 1; // somehow getting user ID here and assigning it to the user_id variable from the database?
+//        $card ->addNote($note);
+
+        //or make a new "by" method in the Note class
+//        $note->by(Auth::user());
+        $card->addNote($note, 1);
+
 
 //        $note = new Note;
 //        $note->body = $request->body;
@@ -32,9 +47,9 @@ class NotesController extends Controller
 //        $card->notes()->create($request->all());
 
         //this is the best way. Explicit
-        $card->addNote(
-            new Note($request->all())
-        );
+//        $card->addNote(
+//            new Note($request->all())
+//        );
 
         return back();
 
